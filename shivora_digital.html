@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shivora Digital — Stay Drippin, Own the Influence</title>
+<meta name="description" content="Shivora Digital is a Haldwani-based AI-powered creative agency delivering AI ads, video editing, social media management, and brand collaborations for businesses and creators."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --deep:#12151f;
+  --mid:#1c2030;
+  --panel:#242840;
+  --panel2:#2c3050;
+  --silver:#a8adc0;
+  --silver-l:#cdd0e0;
+  --purple:#7b6fc4;
+  --purple-l:#a89de8;
+  --purple-d:#5a50a0;
+  --white:#eef0f8;
+  --muted:#565c7a;
+  --border:rgba(168,173,192,0.12);
+  --border-h:rgba(168,173,192,0.28);
+  --glow:rgba(123,111,196,0.18);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{
+  background:var(--deep);
+  color:var(--white);
+  font-family:'Inter',sans-serif;
+  font-size:15px;
+  line-height:1.65;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ─── CURSOR ─── */
+#cursor{
+  position:fixed;width:12px;height:12px;
+  background:var(--purple-l);border-radius:50%;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform .1s,opacity .2s,width .2s,height .2s,background .2s;
+  mix-blend-mode:difference;
+}
+#cursor-ring{
+  position:fixed;width:36px;height:36px;
+  border:1px solid rgba(168,173,192,0.5);border-radius:50%;
+  pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:transform .12s ease,width .2s,height .2s,opacity .3s,border-color .2s;
+}
+body.cursor-hover #cursor{width:6px;height:6px;background:#fff}
+body.cursor-hover #cursor-ring{width:50px;height:50px;border-color:var(--purple-l)}
+body.cursor-click #cursor{width:18px;height:18px}
+
+/* ─── NOISE OVERLAY ─── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:1;opacity:0.4;
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:1.1rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  transition:background .4s,backdrop-filter .4s;
+}
+nav.scrolled{
+  background:rgba(18,21,31,0.92);
+  backdrop-filter:blur(12px);
+}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.35rem;font-weight:600;letter-spacing:.06em;
+  color:var(--white);text-decoration:none;
+}
+.nav-logo-mark{
+  width:34px;height:34px;border-radius:7px;
+  background:linear-gradient(135deg,var(--panel2),var(--purple));
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;font-weight:700;color:var(--silver-l);
+  border:1px solid rgba(123,111,196,.4);
+}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  color:var(--silver);text-decoration:none;
+  font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;
+  transition:color .25s;position:relative;padding-bottom:2px;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:1px;background:var(--purple-l);
+  transform:scaleX(0);transform-origin:right;
+  transition:transform .3s ease;
+}
+.nav-links a:hover{color:var(--white)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-cta{
+  background:transparent;border:1px solid var(--purple);
+  color:var(--purple-l);padding:.48rem 1.3rem;border-radius:4px;
+  font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  font-family:'Inter',sans-serif;cursor:none;
+  transition:all .25s;
+}
+.nav-cta:hover{background:var(--purple);color:var(--white)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:none;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--silver);transition:all .3s}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mobile-menu{
+  display:none;position:fixed;top:64px;left:0;right:0;
+  background:rgba(18,21,31,.97);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);z-index:499;
+  padding:1.5rem 2.5rem;
+  transform:translateY(-10px);opacity:0;
+  transition:transform .3s,opacity .3s;
+}
+.mobile-menu.open{transform:translateY(0);opacity:1}
+.mobile-menu a{
+  display:block;padding:.7rem 0;color:var(--silver);
+  text-decoration:none;font-size:.9rem;letter-spacing:.08em;
+  border-bottom:1px solid var(--border);transition:color .2s;
+}
+.mobile-menu a:last-child{border:none}
+.mobile-menu a:hover{color:var(--white)}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:8rem 2rem 5rem;
+  position:relative;overflow:hidden;
+}
+.hero-orb{
+  position:absolute;border-radius:50%;filter:blur(90px);
+  pointer-events:none;
+}
+.hero-orb-1{
+  width:500px;height:500px;
+  background:radial-gradient(circle,rgba(123,111,196,.22),transparent 70%);
+  top:-100px;left:50%;transform:translateX(-50%);
+  animation:orbFloat 8s ease-in-out infinite;
+}
+.hero-orb-2{
+  width:300px;height:300px;
+  background:radial-gradient(circle,rgba(90,80,160,.15),transparent 70%);
+  bottom:50px;right:10%;
+  animation:orbFloat 11s ease-in-out infinite reverse;
+}
+@keyframes orbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
+.hero-content{position:relative;z-index:2;max-width:780px}
+.hero-eyebrow{
+  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--purple-l);margin-bottom:1.3rem;
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{
+  content:'';display:block;width:24px;height:1px;background:var(--purple-l);opacity:.6;
+}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.8rem,6vw,5rem);
+  font-weight:300;line-height:1.1;
+  color:var(--white);letter-spacing:-.02em;
+  margin-bottom:1.2rem;
+}
+.hero h1 em{font-style:italic;color:var(--purple-l)}
+.hero-sub{
+  color:var(--silver);max-width:500px;margin:0 auto 2.5rem;
+  font-size:1rem;font-weight:300;line-height:1.7;
+}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  background:var(--purple);color:var(--white);border:none;
+  padding:.78rem 2.2rem;border-radius:4px;
+  font-size:.88rem;letter-spacing:.06em;font-weight:500;
+  font-family:'Inter',sans-serif;cursor:none;
+  transition:background .25s,transform .2s;
+}
+.btn-primary:hover{background:var(--purple-l);color:var(--deep);transform:translateY(-1px)}
+.btn-ghost{
+  background:transparent;color:var(--silver-l);
+  border:1px solid var(--border-h);
+  padding:.78rem 2.2rem;border-radius:4px;
+  font-size:.88rem;letter-spacing:.06em;
+  font-family:'Inter',sans-serif;cursor:none;
+  transition:all .25s;
+}
+.btn-ghost:hover{border-color:var(--silver);color:var(--white);transform:translateY(-1px)}
+.hero-ticker{
+  margin-top:4rem;padding-top:2.5rem;
+  border-top:1px solid var(--border);
+  display:flex;gap:3.5rem;justify-content:center;flex-wrap:wrap;
+}
+.ticker-item{text-align:center}
+.ticker-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.2rem;font-weight:600;color:var(--white);
+  display:block;
+}
+.ticker-label{
+  font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);display:block;margin-top:2px;
+}
+.scroll-hint{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  color:var(--muted);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  animation:scrollBounce 2s ease-in-out infinite;
+}
+.scroll-hint::after{
+  content:'';width:1px;height:40px;background:linear-gradient(var(--muted),transparent);
+}
+@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* ─── MARQUEE ─── */
+.marquee-strip{
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:.8rem 0;overflow:hidden;background:var(--mid);
+}
+.marquee-inner{
+  display:flex;gap:3rem;white-space:nowrap;
+  animation:marquee 22s linear infinite;
+  width:max-content;
+}
+.marquee-inner:hover{animation-play-state:paused}
+.marquee-item{
+  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);display:flex;align-items:center;gap:1rem;
+}
+.marquee-item::after{content:'✦';color:var(--purple);font-size:.65rem}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ─── SECTION BASE ─── */
+section{padding:5rem 2.5rem;border-bottom:1px solid var(--border)}
+.section-tag{
+  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--purple-l);margin-bottom:.9rem;
+}
+.section-h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.9rem,3.5vw,2.8rem);
+  font-weight:300;color:var(--white);line-height:1.2;
+}
+.section-desc{color:var(--silver);max-width:480px;margin:.8rem 0 0;font-size:.93rem}
+.section-header-center{text-align:center;margin-bottom:3.5rem}
+.section-header-center .section-desc{margin-left:auto;margin-right:auto}
+
+/* ─── REVEAL ANIMATION ─── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-d1{transition-delay:.1s}
+.reveal-d2{transition-delay:.2s}
+.reveal-d3{transition-delay:.3s}
+.reveal-d4{transition-delay:.4s}
+.reveal-d5{transition-delay:.5s}
+.reveal-d6{transition-delay:.6s}
+
+/* ─── SERVICES ─── */
+.services-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:12px;overflow:hidden;
+  max-width:1100px;margin:0 auto;
+}
+.service-card{
+  background:var(--mid);padding:2.2rem 1.8rem;
+  transition:background .25s,transform .25s;
+  position:relative;overflow:hidden;cursor:none;
+}
+.service-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(123,111,196,.1),transparent 60%);
+  opacity:0;transition:opacity .3s;
+}
+.service-card:hover{background:var(--panel)}
+.service-card:hover::before{opacity:1}
+.svc-icon{
+  width:44px;height:44px;border-radius:10px;
+  background:rgba(123,111,196,.12);
+  border:1px solid rgba(123,111,196,.25);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.2rem;
+  transition:background .25s,border-color .25s;
+}
+.service-card:hover .svc-icon{background:rgba(123,111,196,.22);border-color:rgba(123,111,196,.5)}
+.svc-icon svg{width:20px;height:20px;stroke:var(--purple-l);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.service-card h3{font-size:.95rem;font-weight:500;color:var(--white);margin-bottom:.5rem}
+.service-card p{font-size:.83rem;color:var(--silver);line-height:1.6}
+.svc-tag{
+  display:inline-block;margin-top:.9rem;font-size:.68rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--purple);border:1px solid rgba(123,111,196,.25);
+  padding:.25rem .7rem;border-radius:20px;
+}
+
+/* ─── WORK / PORTFOLIO ─── */
+.work-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;
+  max-width:1100px;margin:0 auto;
+}
+.work-card{
+  background:var(--mid);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+  transition:border-color .25s,transform .3s;cursor:none;
+  position:relative;
+}
+.work-card:hover{border-color:var(--border-h);transform:translateY(-4px)}
+.work-thumb{
+  height:160px;display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:1.9rem;
+  font-style:italic;font-weight:300;letter-spacing:.04em;
+  position:relative;overflow:hidden;
+}
+.work-thumb::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.5));
+}
+.wt-hw{background:linear-gradient(135deg,#172017,#243524);color:#8aaa8a}
+.wt-gfh{background:linear-gradient(135deg,#1e1228,#35204a);color:#c4a0e8}
+.wt-kf{background:linear-gradient(135deg,#13182a,#1f2a48);color:#7090bb}
+.wt-cb{background:linear-gradient(135deg,#1e180e,#3a2e14);color:#c4a86a}
+.work-badge{
+  position:absolute;top:12px;right:12px;z-index:2;
+  font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(18,21,31,.85);border:1px solid var(--border-h);
+  color:var(--purple-l);padding:.3rem .7rem;border-radius:20px;
+}
+.work-info{padding:1.3rem 1.4rem 1.4rem}
+.work-tag{
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--purple-l);margin-bottom:.4rem;
+}
+.work-info h3{font-size:.97rem;font-weight:500;color:var(--white);margin-bottom:.35rem}
+.work-info p{font-size:.82rem;color:var(--silver);line-height:1.55}
+.work-link{
+  display:inline-flex;align-items:center;gap:.4rem;
+  margin-top:.75rem;font-size:.78rem;color:var(--purple-l);
+  text-decoration:none;transition:gap .2s,color .2s;
+}
+.work-link:hover{gap:.7rem;color:var(--white)}
+.work-link span{font-size:.85rem}
+
+/* ─── FOUNDER ─── */
+.founder-wrap{
+  max-width:900px;margin:0 auto;
+  display:grid;grid-template-columns:220px 1fr;gap:3rem;
+  align-items:center;
+}
+.founder-avatar{
+  width:200px;height:200px;border-radius:50%;
+  border:1px solid var(--border-h);
+  background:linear-gradient(135deg,var(--panel2),var(--purple-d));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:3.5rem;
+  font-style:italic;color:var(--purple-l);
+  position:relative;flex-shrink:0;
+}
+.founder-avatar::after{
+  content:'';position:absolute;inset:-6px;border-radius:50%;
+  border:1px dashed rgba(123,111,196,.3);
+  animation:spin 20s linear infinite;
+}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.founder-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:300;color:var(--white);
+  margin-bottom:.25rem;
+}
+.founder-title{
+  font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--purple-l);margin-bottom:1rem;
+}
+.founder-bio{color:var(--silver);font-size:.9rem;line-height:1.75;margin-bottom:1.2rem}
+.founder-links{display:flex;gap:.8rem;flex-wrap:wrap}
+.founder-link{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-size:.78rem;color:var(--silver);text-decoration:none;
+  border:1px solid var(--border-h);padding:.4rem .9rem;border-radius:20px;
+  transition:all .2s;
+}
+.founder-link:hover{border-color:var(--purple-l);color:var(--purple-l)}
+.founder-link svg{width:14px;height:14px;fill:currentColor}
+
+/* ─── PROCESS ─── */
+.process-steps{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  max-width:1000px;margin:0 auto;
+  border:1px solid var(--border);border-radius:12px;overflow:hidden;
+}
+.process-step{
+  padding:2rem 1.5rem;background:var(--mid);
+  border-right:1px solid var(--border);
+  position:relative;transition:background .25s;
+}
+.process-step:last-child{border-right:none}
+.process-step:hover{background:var(--panel)}
+.process-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.5rem;font-weight:300;color:var(--border-h);
+  margin-bottom:1rem;line-height:1;
+}
+.process-step h3{font-size:.9rem;font-weight:500;color:var(--white);margin-bottom:.4rem}
+.process-step p{font-size:.8rem;color:var(--silver);line-height:1.55}
+
+/* ─── ENQUIRY ─── */
+.enquiry-grid{
+  display:grid;grid-template-columns:1fr 1.3fr;gap:3rem;
+  max-width:1000px;margin:0 auto;
+}
+.enq-intro h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.2rem;font-weight:300;color:var(--white);
+  line-height:1.25;margin-bottom:1rem;
+}
+.enq-intro p{color:var(--silver);font-size:.9rem;line-height:1.75;margin-bottom:1.5rem}
+.contact-rows{display:flex;flex-direction:column;gap:.75rem}
+.contact-row{
+  display:flex;align-items:center;gap:.75rem;
+  color:var(--silver);font-size:.85rem;
+}
+.c-icon{
+  width:32px;height:32px;flex-shrink:0;
+  background:rgba(123,111,196,.1);border:1px solid rgba(123,111,196,.2);
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+}
+.c-icon svg{width:14px;height:14px;stroke:var(--purple-l);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* FORM */
+.enq-form{display:flex;flex-direction:column;gap:.85rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.field{display:flex;flex-direction:column;gap:.35rem}
+.field label{
+  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);
+}
+.field input,.field select,.field textarea{
+  background:var(--mid);border:1px solid var(--border-h);
+  border-radius:6px;color:var(--white);
+  padding:.65rem .95rem;font-size:.88rem;
+  font-family:'Inter',sans-serif;outline:none;
+  transition:border-color .25s,background .2s;width:100%;
+}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted)}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--purple);background:var(--panel);
+}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23565c7a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:calc(100% - 12px) 50%}
+.field select option{background:var(--panel)}
+.field textarea{min-height:88px;resize:vertical}
+.radio-group{display:flex;flex-wrap:wrap;gap:.5rem}
+.radio-opt{
+  display:flex;align-items:center;gap:.4rem;
+  font-size:.8rem;color:var(--silver);cursor:none;
+  background:var(--mid);border:1px solid var(--border-h);
+  padding:.4rem .9rem;border-radius:20px;
+  transition:all .2s;
+}
+.radio-opt:hover{border-color:var(--purple)}
+.radio-opt input{display:none}
+.radio-opt.selected{border-color:var(--purple);color:var(--purple-l);background:rgba(123,111,196,.1)}
+.submit-btn{
+  background:var(--purple);color:var(--white);border:none;
+  padding:.82rem 1.8rem;border-radius:6px;
+  font-size:.9rem;font-weight:500;font-family:'Inter',sans-serif;
+  cursor:none;transition:background .25s,transform .2s;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+}
+.submit-btn:hover{background:var(--purple-l);color:var(--deep);transform:translateY(-1px)}
+.submit-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+.form-note{font-size:.72rem;color:var(--muted);text-align:center;margin-top:.2rem}
+.form-success{
+  display:none;
+  text-align:center;padding:2.5rem 1.5rem;
+  background:rgba(123,111,196,.08);border:1px solid rgba(123,111,196,.3);
+  border-radius:10px;color:var(--purple-l);
+}
+.form-success h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;font-weight:300;margin-bottom:.5rem;color:var(--white);
+}
+.form-success p{color:var(--silver);font-size:.88rem}
+
+/* ─── FOOTER ─── */
+footer{
+  padding:2.5rem 2.5rem 1.5rem;
+  border-top:1px solid var(--border);
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:1.5rem;align-items:start;
+}
+.footer-brand{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;font-weight:300;color:var(--silver-l);
+  margin-bottom:.5rem;
+}
+.footer-tagline{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.footer-col h4{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.9rem}
+.footer-col a{
+  display:block;color:var(--silver);text-decoration:none;
+  font-size:.84rem;margin-bottom:.45rem;
+  transition:color .2s;
+}
+.footer-col a:hover{color:var(--white)}
+.footer-bottom{
+  grid-column:1/-1;padding-top:1.2rem;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:.5rem;
+}
+.footer-bottom p{font-size:.73rem;color:var(--muted)}
+
+/* ─── TOOLTIP ─── */
+.tooltip-wrap{position:relative}
+.tooltip-tip{
+  position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%);
+  background:var(--panel2);border:1px solid var(--border-h);
+  color:var(--silver-l);font-size:.76rem;padding:.4rem .8rem;
+  border-radius:6px;white-space:nowrap;pointer-events:none;
+  opacity:0;transition:opacity .2s;z-index:10;
+}
+.tooltip-wrap:hover .tooltip-tip{opacity:1}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:820px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .hamburger{display:flex}
+  .mobile-menu{display:block}
+  .hero{padding:6rem 1.5rem 4rem}
+  .hero h1{font-size:2.5rem}
+  section{padding:3.5rem 1.5rem}
+  .work-grid{grid-template-columns:1fr}
+  .enquiry-grid{grid-template-columns:1fr}
+  .enq-intro{display:none}
+  .founder-wrap{grid-template-columns:1fr;text-align:center}
+  .founder-avatar{margin:0 auto}
+  .founder-links{justify-content:center}
+  .process-steps{grid-template-columns:1fr 1fr}
+  .process-step{border-bottom:1px solid var(--border)}
+  footer{grid-template-columns:1fr;gap:1.5rem}
+  .footer-bottom{flex-direction:column;text-align:center}
+}
+@media(max-width:520px){
+  .hero-ticker{gap:2rem}
+  .form-row{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-mark">SD</div>
+    Shivora Digital
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#founder">Founder</a></li>
+    <li><a href="#enquiry">Enquiry</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('enquiry').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#services">Services</a>
+  <a href="#work">Work</a>
+  <a href="#founder">Founder</a>
+  <a href="#enquiry">Enquiry</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">AI-Powered Creative Agency · Haldwani, Uttarakhand</div>
+    <h1>Where <em>Influence</em><br>Meets Intelligent Design</h1>
+    <p class="hero-sub">AI ads, professional editing, video production, social media management, and collab-driven promotions — built for creators, brands, and businesses ready to scale.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('enquiry').scrollIntoView({behavior:'smooth'})">Start a Project</button>
+      <button class="btn-ghost" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">View Our Work</button>
+    </div>
+    <div class="hero-ticker">
+      <div class="ticker-item"><span class="ticker-num" data-target="15">0</span><span class="ticker-label">Brands Managed</span></div>
+      <div class="ticker-item"><span class="ticker-num">AI-First</span><span class="ticker-label">Content Strategy</span></div>
+      <div class="ticker-item"><span class="ticker-num" data-target="360">0</span><span class="ticker-label">° Social Coverage</span></div>
+      <div class="ticker-item"><span class="ticker-num">2</span><span class="ticker-label">Signature Platforms Built</span></div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-inner">
+    <span class="marquee-item">AI Ads</span>
+    <span class="marquee-item">Reels & Video Editing</span>
+    <span class="marquee-item">Social Media Management</span>
+    <span class="marquee-item">Brand Collaborations</span>
+    <span class="marquee-item">Virtual Influencer</span>
+    <span class="marquee-item">Event Marketing</span>
+    <span class="marquee-item">Kumaon Culture</span>
+    <span class="marquee-item">Haldwani</span>
+    <span class="marquee-item">AI Ads</span>
+    <span class="marquee-item">Reels & Video Editing</span>
+    <span class="marquee-item">Social Media Management</span>
+    <span class="marquee-item">Brand Collaborations</span>
+    <span class="marquee-item">Virtual Influencer</span>
+    <span class="marquee-item">Event Marketing</span>
+    <span class="marquee-item">Kumaon Culture</span>
+    <span class="marquee-item">Haldwani</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header-center reveal">
+    <div class="section-tag">What We Do</div>
+    <h2 class="section-h2">End-to-End Creative Services</h2>
+    <p class="section-desc">Every deliverable is AI-augmented, creatively led, and built to perform.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal reveal-d1">
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0 16a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM4.93 4.93a2 2 0 1 0 0 2.83 2 2 0 0 0 0-2.83zm14.14 14.14a2 2 0 1 0 0 2.83 2 2 0 0 0 0-2.83zM2 12a2 2 0 1 0 4 0 2 2 0 0 0-4 0zm16 0a2 2 0 1 0 4 0 2 2 0 0 0-4 0z"/></svg>
+      </div>
+      <h3>AI-Generated Ads</h3>
+      <p>Hyper-targeted video and image ads powered by Veo 2, Midjourney, and custom AI prompting pipelines that convert.</p>
+      <div class="svc-tag">Veo 2 · Midjourney</div>
+    </div>
+    <div class="service-card reveal reveal-d2">
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><path d="M14.5 4.5v15M9.5 9.5l-5 2.5 5 2.5M14.5 4.5l5 2.5v10l-5 2.5"/></svg>
+      </div>
+      <h3>Video Editing</h3>
+      <p>Reels, short-form content, event teasers, music video cuts, and brand films — edited and colour-graded to industry standard.</p>
+      <div class="svc-tag">Reels · Teasers · Films</div>
+    </div>
+    <div class="service-card reveal reveal-d3">
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h4M9 15h5"/></svg>
+      </div>
+      <h3>Professional Editing</h3>
+      <p>Photo retouching, graphic design, poster creation, and visual identity assets — polished to a premium finish.</p>
+      <div class="svc-tag">Design · Retouching</div>
+    </div>
+    <div class="service-card reveal reveal-d4">
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="12" y1="12" x2="12" y2="12.01"/></svg>
+      </div>
+      <h3>Social Media Management</h3>
+      <p>Content calendars, caption writing, scheduling, growth strategy, and community management for celebrities and businesses.</p>
+      <div class="svc-tag">Instagram · Strategy</div>
+    </div>
+    <div class="service-card reveal reveal-d5">
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>Collabs & Promotions</h3>
+      <p>End-to-end influencer collaboration, event sponsorships, and business promotion campaigns with authentic reach.</p>
+      <div class="svc-tag">Collabs · Events</div>
+    </div>
+    <div class="service-card reveal reveal-d6">
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <h3>Festival & Event Marketing</h3>
+      <p>Full digital presence for cultural events, fests, and community celebrations — KumaonFest, Lok Mahotsav, and beyond.</p>
+      <div class="svc-tag">KumaonFest · Lok Mahotsav</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" style="background:var(--mid)">
+  <div class="section-header-center reveal">
+    <div class="section-tag">How We Work</div>
+    <h2 class="section-h2">The Process</h2>
+  </div>
+  <div class="process-steps">
+    <div class="process-step reveal reveal-d1">
+      <div class="process-num">01</div>
+      <h3>Discovery Call</h3>
+      <p>We understand your brand, goals, and audience before anything else.</p>
+    </div>
+    <div class="process-step reveal reveal-d2">
+      <div class="process-num">02</div>
+      <h3>Strategy & Concept</h3>
+      <p>AI-assisted research, content planning, and creative direction tailored to you.</p>
+    </div>
+    <div class="process-step reveal reveal-d3">
+      <div class="process-num">03</div>
+      <h3>Production</h3>
+      <p>Editing, AI content generation, caption writing, and asset creation — all in-house.</p>
+    </div>
+    <div class="process-step reveal reveal-d4">
+      <div class="process-num">04</div>
+      <h3>Publish & Grow</h3>
+      <p>Scheduled publishing, performance tracking, and iterative optimisation for growth.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-header-center reveal">
+    <div class="section-tag">Featured Work</div>
+    <h2 class="section-h2">Projects & Platforms</h2>
+    <p class="section-desc">Our own brands and client collaborations — rooted in Kumaon, reaching everywhere.</p>
+  </div>
+  <div class="work-grid">
+    <div class="work-card reveal reveal-d1">
+      <div class="work-thumb wt-hw">
+        <span style="position:relative;z-index:1">Haldwani Wale</span>
+        <div class="work-badge">Community · IG Page</div>
+      </div>
+      <div class="work-info">
+        <div class="work-tag">Community Platform</div>
+        <h3>@haldwaniwale</h3>
+        <p>Haldwani's own community Instagram — local news, culture, food, events, and the digital heartbeat of the Kumaon region. A platform built by Shivora Digital.</p>
+        <a class="work-link" href="https://www.instagram.com/haldwaniwale/" target="_blank">
+          Visit on Instagram <span>↗</span>
+        </a>
+      </div>
+    </div>
+    <div class="work-card reveal reveal-d2">
+      <div class="work-thumb wt-gfh">
+        <span style="position:relative;z-index:1">Girl from Haldwani</span>
+        <div class="work-badge">AI Virtual Influencer</div>
+      </div>
+      <div class="work-info">
+        <div class="work-tag">AI Virtual Influencer · Built by Shivora Digital</div>
+        <h3>@girlfromhaldwani</h3>
+        <p>India's AI virtual influencer rooted in Uttarakhand identity. Promoting Lok Mahotsav 2026, Pahadi culture, and modern storytelling through AI-generated content.</p>
+        <a class="work-link" href="https://www.instagram.com/girlfromhaldwani/" target="_blank">
+          Visit on Instagram <span>↗</span>
+        </a>
+      </div>
+    </div>
+    <div class="work-card reveal reveal-d3">
+      <div class="work-thumb wt-kf">
+        <span style="position:relative;z-index:1">KumaonFest</span>
+        <div class="work-badge">Event Marketing</div>
+      </div>
+      <div class="work-info">
+        <div class="work-tag">Festival Marketing · Core Team</div>
+        <h3>KumaonFest 2025–26</h3>
+        <p>Designed promotional assets, black-gold QR posters, mystery-theme merchandise, and ran the digital campaign for Uttarakhand's flagship cultural festival.</p>
+      </div>
+    </div>
+    <div class="work-card reveal reveal-d4">
+      <div class="work-thumb wt-cb">
+        <span style="position:relative;z-index:1">Cafes & Brands</span>
+        <div class="work-badge">Retainer Clients</div>
+      </div>
+      <div class="work-info">
+        <div class="work-tag">Social Media Retainer · Ongoing</div>
+        <h3>Local Businesses & Food Brands</h3>
+        <p>Monthly social media packages for cafes, food carts (Mac n Sip at Vintage Carnival), and local businesses — content, reels, captions, and community management.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section id="founder" style="background:var(--mid)">
+  <div class="section-header-center reveal" style="margin-bottom:3rem">
+    <div class="section-tag">The Person Behind It</div>
+    <h2 class="section-h2">Meet the Founder</h2>
+  </div>
+  <div class="founder-wrap reveal">
+    <div class="founder-avatar">SJ</div>
+    <div>
+      <div class="founder-name">Shivam Joshi</div>
+      <div class="founder-title">Founder & Creative Director · Shivora Digital</div>
+      <p class="founder-bio">
+        BCA graduate from Haldwani, Uttarakhand — building at the intersection of AI, content creation, and community. Creator of <strong style="color:var(--silver-l);font-weight:500">@girlfromhaldwani</strong> (India's first Pahadi AI virtual influencer), community manager at <strong style="color:var(--silver-l);font-weight:500">@haldwaniwale</strong>, and core team member at KumaonFest.<br><br>
+        Specialising in Generative AI workflows (LangChain, Hugging Face, Veo 2), social media growth, and brand storytelling that bridges regional pride with emerging technology.
+      </p>
+      <div class="founder-links">
+        <a class="founder-link" href="https://www.instagram.com/mr_joshi03/" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @mr_joshi03
+        </a>
+        <a class="founder-link" href="https://www.instagram.com/shivamsnipsai/" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @shivamsnipsai
+        </a>
+        <a class="founder-link" href="https://www.instagram.com/shivoradigital/" target="_blank">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          @shivoradigital
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENQUIRY -->
+<section id="enquiry">
+  <div class="section-header-center reveal">
+    <div class="section-tag">Let's Work Together</div>
+    <h2 class="section-h2">Start a Conversation</h2>
+  </div>
+  <div class="enquiry-grid">
+    <div class="enq-intro reveal">
+      <h3>Businesses and creators, we're ready for you.</h3>
+      <p>Whether you're a local business looking to grow online, a creator seeking brand collaborations, or an event that needs a full digital push — reach out and we'll get back within 24 hours.</p>
+      <div class="contact-rows">
+        <div class="contact-row">
+          <div class="c-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
+          DM via <a href="https://www.instagram.com/shivoradigital/" target="_blank" style="color:var(--purple-l);margin-left:.3rem">@shivoradigital</a>
+        </div>
+        <div class="contact-row">
+          <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          Haldwani, Uttarakhand, India
+        </div>
+        <div class="contact-row">
+          <div class="c-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+          Reply within 24 hours
+        </div>
+        <div class="contact-row">
+          <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+          <a href="https://www.instagram.com/shivoradigital/" target="_blank" style="color:var(--purple-l)">instagram.com/shivoradigital</a>
+        </div>
+      </div>
+    </div>
+    <div class="reveal reveal-d2">
+      <form class="enq-form" id="enqForm" onsubmit="return submitForm(event)">
+        <div class="form-row">
+          <div class="field">
+            <label>Your Name *</label>
+            <input type="text" id="f-name" placeholder="Full name" required/>
+          </div>
+          <div class="field">
+            <label>Contact *</label>
+            <input type="text" id="f-contact" placeholder="Phone or email" required/>
+          </div>
+        </div>
+        <div class="field">
+          <label>You are a… *</label>
+          <div class="radio-group" id="radio-type">
+            <label class="radio-opt" onclick="selectRadio(this,'type')"><input type="radio" name="type" value="Business"/>Business / Brand</label>
+            <label class="radio-opt" onclick="selectRadio(this,'type')"><input type="radio" name="type" value="Creator"/>Creator / Influencer</label>
+            <label class="radio-opt" onclick="selectRadio(this,'type')"><input type="radio" name="type" value="Event"/>Event Organizer</label>
+            <label class="radio-opt" onclick="selectRadio(this,'type')"><input type="radio" name="type" value="Celebrity"/>Celebrity</label>
+            <label class="radio-opt" onclick="selectRadio(this,'type')"><input type="radio" name="type" value="Other"/>Other</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Service Needed *</label>
+          <select id="f-service" required>
+            <option value="">Select a service</option>
+            <option>AI Ads & Content</option>
+            <option>Video Editing</option>
+            <option>Social Media Management</option>
+            <option>Brand Collab / Promotion</option>
+            <option>Event Marketing</option>
+            <option>Full Package</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Tell us about your project</label>
+          <textarea id="f-msg" placeholder="What are you trying to achieve? Budget, timeline, goals…"></textarea>
+        </div>
+        <div class="field">
+          <label>How did you hear about us?</label>
+          <select id="f-source">
+            <option value="">Select</option>
+            <option>Instagram</option>
+            <option>Referral</option>
+            <option>Google</option>
+            <option>KumaonFest</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <button type="submit" class="submit-btn">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send Enquiry
+        </button>
+        <p class="form-note">No commitment. Just a conversation.</p>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <svg viewBox="0 0 24 24" style="width:40px;height:40px;stroke:var(--purple-l);fill:none;stroke-width:1.5;margin-bottom:1rem"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <h4>Thank you for reaching out.</h4>
+        <p>We've received your enquiry and will get back to you within 24 hours.<br><br>
+        In the meantime, follow us on <a href="https://www.instagram.com/shivoradigital/" target="_blank" style="color:var(--purple-l)">@shivoradigital</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Shivora Digital</div>
+    <div class="footer-tagline">Stay Drippin, Own the Influence</div>
+  </div>
+  <div class="footer-col">
+    <h4>Pages</h4>
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#founder">Founder</a>
+    <a href="#enquiry">Enquiry</a>
+  </div>
+  <div class="footer-col">
+    <h4>Our Platforms</h4>
+    <a href="https://www.instagram.com/shivoradigital/" target="_blank">@shivoradigital</a>
+    <a href="https://www.instagram.com/haldwaniwale/" target="_blank">@haldwaniwale</a>
+    <a href="https://www.instagram.com/girlfromhaldwani/" target="_blank">@girlfromhaldwani</a>
+    <a href="https://www.instagram.com/mr_joshi03/" target="_blank">@mr_joshi03 (Founder)</a>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Shivora Digital. Haldwani, Uttarakhand, India. All rights reserved.</p>
+    <p>Designed & Built with AI · Powered by Shivam Joshi</p>
+  </div>
+</footer>
+
+<script>
+// ─── CURSOR
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX;my=e.clientY;
+  cursor.style.left=mx+'px';cursor.style.top=my+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*.12;ry+=(my-ry)*.12;
+  ring.style.left=rx+'px';ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}animRing();
+document.querySelectorAll('a,button,.work-card,.service-card,.founder-link,.radio-opt').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
+});
+document.addEventListener('mousedown',()=>document.body.classList.add('cursor-click'));
+document.addEventListener('mouseup',()=>document.body.classList.remove('cursor-click'));
+
+// ─── SERVICE CARD MOUSE GLOW
+document.querySelectorAll('.service-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=((e.clientX-r.left)/r.width*100)+'%';
+    const y=((e.clientY-r.top)/r.height*100)+'%';
+    card.style.setProperty('--mx',x);
+    card.style.setProperty('--my',y);
+  });
+});
+
+// ─── NAV SCROLL
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>40);
+});
+
+// ─── HAMBURGER
+const ham=document.getElementById('hamburger');
+const mmenu=document.getElementById('mobile-menu');
+ham.addEventListener('click',()=>{
+  ham.classList.toggle('open');
+  mmenu.classList.toggle('open');
+});
+mmenu.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('click',()=>{ham.classList.remove('open');mmenu.classList.remove('open')});
+});
+
+// ─── SCROLL REVEAL
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+
+// ─── COUNT UP
+function countUp(el,target,duration=1500){
+  let start=0,startTime=null;
+  const step=ts=>{
+    if(!startTime)startTime=ts;
+    const prog=Math.min((ts-startTime)/duration,1);
+    el.textContent=Math.floor(prog*target);
+    if(prog<1)requestAnimationFrame(step);
+    else el.textContent=target;
+  };requestAnimationFrame(step);
+}
+const countObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting&&e.target.dataset.target){
+      countUp(e.target,+e.target.dataset.target);
+      countObs.unobserve(e.target);
+    }
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-target]').forEach(el=>countObs.observe(el));
+
+// ─── RADIO SELECT
+function selectRadio(label,group){
+  document.querySelectorAll('#radio-'+group+' .radio-opt').forEach(l=>l.classList.remove('selected'));
+  label.classList.add('selected');
+}
+
+// ─── FORM SUBMIT
+function submitForm(e){
+  e.preventDefault();
+  const name=document.getElementById('f-name').value.trim();
+  const contact=document.getElementById('f-contact').value.trim();
+  const service=document.getElementById('f-service').value;
+  const type=document.querySelector('input[name="type"]:checked');
+  if(!name||!contact||!service||!type){
+    const missing=[];
+    if(!name)missing.push('Name');
+    if(!contact)missing.push('Contact');
+    if(!type)missing.push('Type');
+    if(!service)missing.push('Service');
+    alert('Please fill in: '+missing.join(', '));
+    return false;
+  }
+  document.getElementById('enqForm').style.display='none';
+  document.getElementById('formSuccess').style.display='block';
+  return false;
+}
+
+// ─── SMOOTH SCROLL FOR ANCHOR LINKS
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const target=document.querySelector(a.getAttribute('href'));
+    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'});}
+  });
+});
+</script>
+</body>
+</html>
