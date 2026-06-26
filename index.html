@@ -1020,21 +1020,24 @@ function selectRadio(label,group){
   if(input) input.checked=true;
 }
 
-const ENQUIRY_STORE_KEY='shivora-enquiries';
-
-function getStoredEnquiries(){
-  try{
-    const raw=localStorage.getItem(ENQUIRY_STORE_KEY);
-    return raw ? JSON.parse(raw) : [];
-  }catch{return []};
-}
-
-function setStoredEnquiries(entries){
-  try{localStorage.setItem(ENQUIRY_STORE_KEY, JSON.stringify(entries));}catch{}
+function buildMailtoUrl({name,contact,service,type,message,source}){
+  const subject=encodeURIComponent(`Shivora Digital enquiry from ${name}`);
+  const lines=[
+    `Name: ${name}`,
+    `Contact: ${contact}`,
+    `Type: ${type}`,
+    `Service: ${service}`,
+    `Source: ${source || '—'}`,
+    '',
+    'Project details:',
+    message || 'No details provided.'
+  ];
+  const body=encodeURIComponent(lines.join('\n'));
+  return `mailto:shivoradigital@gmail.com?subject=${subject}&body=${body}`;
 }
 
 // ─── FORM SUBMIT
-async function submitForm(e){
+function submitForm(e){
   e.preventDefault();
   const form=document.getElementById('enqForm');
   const name=document.getElementById('f-name').value.trim();
@@ -1053,25 +1056,19 @@ async function submitForm(e){
     return false;
   }
 
-  const payload={
-    id: Date.now().toString(36)+Math.random().toString(36).slice(2),
-    name,
-    contact,
-    type: type.value,
-    service,
-    message,
-    source,
-    ts: Date.now(),
-    read:false
-  };
-
-  const entries=[payload, ...getStoredEnquiries()];
-  setStoredEnquiries(entries);
+  const mailtoUrl=buildMailtoUrl({name,contact,service,type:type.value,message,source});
+  window.open(mailtoUrl, '_blank');
 
   form.reset();
   document.querySelectorAll('#radio-type .radio-opt').forEach(opt=>opt.classList.remove('selected'));
   document.getElementById('enqForm').style.display='none';
-  document.getElementById('formSuccess').style.display='block';
+  const success=document.getElementById('formSuccess');
+  success.innerHTML=`
+    <svg viewBox="0 0 24 24" style="width:40px;height:40px;stroke:var(--purple-l);fill:none;stroke-width:1.5;margin-bottom:1rem"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <h4>Thanks for reaching out.</h4>
+    <p>Your email app should open with your enquiry pre-filled for <a href="mailto:shivoradigital@gmail.com" style="color:var(--purple-l)">shivoradigital@gmail.com</a>.<br><br>If it does not, please email us directly at <a href="mailto:shivoradigital@gmail.com" style="color:var(--purple-l)">shivoradigital@gmail.com</a>.</p>
+  `;
+  success.style.display='block';
   return false;
 }
 
