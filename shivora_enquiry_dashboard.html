@@ -1,0 +1,287 @@
+
+<h2 class="sr-only">Shivora Digital enquiry dashboard — view, filter, and manage form submissions</h2>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.dash{font-size:14px;padding:1rem 0}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:.75rem}
+.topbar-left{display:flex;align-items:center;gap:10px}
+.brand{font-size:15px;font-weight:500;color:var(--text-primary)}
+.brand span{font-size:12px;font-weight:400;color:var(--text-muted);margin-left:4px}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.25rem}
+.stat{background:var(--surface-1);border-radius:var(--radius);padding:.75rem 1rem}
+.stat-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+.stat-val{font-size:22px;font-weight:500;color:var(--text-primary)}
+.stat-sub{font-size:11px;color:var(--text-muted);margin-top:2px}
+.toolbar{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
+.toolbar input{flex:1;min-width:160px;font-size:13px}
+.toolbar select{font-size:13px;width:auto}
+.filter-btn{font-size:12px;padding:0 12px;height:36px;border-radius:var(--radius);border:.5px solid var(--border-strong);background:transparent;color:var(--text-secondary);cursor:pointer;transition:all .15s;white-space:nowrap}
+.filter-btn.active{background:var(--bg-accent);color:var(--text-accent);border-color:var(--border-accent)}
+.filter-btn:hover:not(.active){background:var(--surface-1)}
+.entries{border:.5px solid var(--border);border-radius:12px;overflow:hidden}
+.entry-row{display:grid;grid-template-columns:2fr 1.4fr 1.2fr 1fr auto;gap:12px;align-items:center;padding:.75rem 1rem;border-bottom:.5px solid var(--border);transition:background .1s;cursor:pointer}
+.entry-row:last-child{border-bottom:none}
+.entry-row:hover{background:var(--surface-1)}
+.entry-row.selected{background:var(--bg-accent)}
+.entry-head{display:flex;align-items:center;gap:10px}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--bg-pro);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--text-pro);flex-shrink:0}
+.entry-name{font-size:13px;font-weight:500;color:var(--text-primary)}
+.entry-contact{font-size:12px;color:var(--text-muted);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:400}
+.badge-business{background:var(--bg-accent);color:var(--text-accent)}
+.badge-creator{background:var(--bg-pro);color:var(--text-pro)}
+.badge-event{background:var(--bg-warning);color:var(--text-warning)}
+.badge-celebrity{background:#fbeaf0;color:#993556}
+.badge-other{background:var(--surface-1);color:var(--text-secondary);border:.5px solid var(--border-strong)}
+.entry-service{font-size:12px;color:var(--text-secondary)}
+.entry-time{font-size:11px;color:var(--text-muted);white-space:nowrap}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--fill-success);flex-shrink:0}
+.status-dot.read{background:var(--border-stronger)}
+.col-header{display:grid;grid-template-columns:2fr 1.4fr 1.2fr 1fr auto;gap:12px;padding:.5rem 1rem;background:var(--surface-1);border-bottom:.5px solid var(--border)}
+.col-header span{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em}
+.empty{text-align:center;padding:3rem 1rem;color:var(--text-muted)}
+.empty i{font-size:32px;display:block;margin-bottom:.5rem;opacity:.4}
+.detail-panel{margin-top:1rem;border:.5px solid var(--border);border-radius:12px;padding:1.25rem;background:var(--surface-2)}
+.detail-panel.hidden{display:none}
+.dp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;padding-bottom:1rem;border-bottom:.5px solid var(--border)}
+.dp-name{font-size:16px;font-weight:500;color:var(--text-primary)}
+.dp-time{font-size:12px;color:var(--text-muted);margin-top:3px}
+.dp-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 1.5rem;margin-bottom:1rem}
+.dp-field label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:3px}
+.dp-field span{font-size:13px;color:var(--text-primary)}
+.dp-msg{margin-bottom:1rem}
+.dp-msg label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:5px}
+.dp-msg p{font-size:13px;color:var(--text-secondary);line-height:1.6;background:var(--surface-1);padding:.75rem 1rem;border-radius:var(--radius);border:.5px solid var(--border)}
+.dp-actions{display:flex;gap:8px;flex-wrap:wrap}
+.dp-actions button{font-size:12px}
+.close-btn{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:18px;padding:0 4px;line-height:1}
+.close-btn:hover{color:var(--text-primary)}
+.new-badge{font-size:10px;background:var(--fill-danger);color:#fff;padding:1px 6px;border-radius:10px;margin-left:6px;vertical-align:middle}
+.add-demo-btn{font-size:12px}
+</style>
+
+<div class="dash">
+  <div class="topbar">
+    <div class="topbar-left">
+      <i class="ti ti-inbox" style="font-size:18px;color:var(--text-accent)" aria-hidden="true"></i>
+      <span class="brand">Shivora Digital <span>Enquiry Dashboard</span></span>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="add-demo-btn filter-btn" onclick="addDemo()"><i class="ti ti-plus" aria-hidden="true"></i> Add demo entry</button>
+      <button class="filter-btn" onclick="clearAll()" style="color:var(--text-danger);border-color:var(--border-danger)"><i class="ti ti-trash" aria-hidden="true"></i> Clear all</button>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat"><div class="stat-label">Total enquiries</div><div class="stat-val" id="s-total">0</div></div>
+    <div class="stat"><div class="stat-label">Unread</div><div class="stat-val" id="s-unread" style="color:var(--text-accent)">0</div></div>
+    <div class="stat"><div class="stat-label">This week</div><div class="stat-val" id="s-week">0</div></div>
+    <div class="stat"><div class="stat-label">Top service</div><div class="stat-val" id="s-top" style="font-size:13px;padding-top:4px">—</div></div>
+  </div>
+
+  <div class="toolbar">
+    <input type="text" id="search-input" placeholder="Search by name or contact…" oninput="renderList()"/>
+    <select id="filter-type" onchange="renderList()">
+      <option value="">All types</option>
+      <option>Business / Brand</option>
+      <option>Creator / Influencer</option>
+      <option>Event Organizer</option>
+      <option>Celebrity</option>
+      <option>Other</option>
+    </select>
+    <select id="filter-service" onchange="renderList()">
+      <option value="">All services</option>
+      <option>AI Ads & Content</option>
+      <option>Video Editing</option>
+      <option>Social Media Management</option>
+      <option>Brand Collab / Promotion</option>
+      <option>Event Marketing</option>
+      <option>Full Package</option>
+    </select>
+    <button class="filter-btn active" id="btn-all" onclick="setReadFilter('all')">All</button>
+    <button class="filter-btn" id="btn-unread" onclick="setReadFilter('unread')">Unread only</button>
+  </div>
+
+  <div class="entries" id="entries-wrap">
+    <div class="col-header">
+      <span>Contact</span><span>Type</span><span>Service</span><span>Date</span><span></span>
+    </div>
+    <div id="entries-list"></div>
+  </div>
+
+  <div class="detail-panel hidden" id="detail-panel"></div>
+</div>
+
+<script>
+const STORE_KEY = 'shivora-enquiries';
+let enquiries = [];
+let readFilter = 'all';
+let selectedId = null;
+
+async function load() {
+  try {
+    const r = await window.storage.get(STORE_KEY);
+    enquiries = r ? JSON.parse(r.value) : [];
+  } catch(e) { enquiries = []; }
+  updateStats();
+  renderList();
+}
+
+async function save() {
+  try { await window.storage.set(STORE_KEY, JSON.stringify(enquiries)); } catch(e) {}
+}
+
+function updateStats() {
+  document.getElementById('s-total').textContent = enquiries.length;
+  const unread = enquiries.filter(e => !e.read).length;
+  document.getElementById('s-unread').textContent = unread;
+  const week = Date.now() - 7*24*60*60*1000;
+  document.getElementById('s-week').textContent = enquiries.filter(e => e.ts > week).length;
+  const svcCount = {};
+  enquiries.forEach(e => { svcCount[e.service] = (svcCount[e.service]||0)+1; });
+  const top = Object.entries(svcCount).sort((a,b)=>b[1]-a[1])[0];
+  document.getElementById('s-top').textContent = top ? top[0].split('/')[0].trim() : '—';
+  const unreadBtn = document.getElementById('btn-unread');
+  unreadBtn.textContent = unread > 0 ? `Unread (${unread})` : 'Unread only';
+}
+
+function badgeClass(type) {
+  const map = {'Business / Brand':'business','Creator / Influencer':'creator','Event Organizer':'event','Celebrity':'celebrity'};
+  return 'badge badge-' + (map[type] || 'other');
+}
+
+function initials(name) {
+  return name.split(' ').map(w=>w[0]||'').join('').toUpperCase().slice(0,2) || '?';
+}
+
+function timeAgo(ts) {
+  const diff = Date.now() - ts;
+  if(diff < 60000) return 'Just now';
+  if(diff < 3600000) return Math.floor(diff/60000) + 'm ago';
+  if(diff < 86400000) return Math.floor(diff/3600000) + 'h ago';
+  return Math.floor(diff/86400000) + 'd ago';
+}
+
+function setReadFilter(f) {
+  readFilter = f;
+  document.getElementById('btn-all').classList.toggle('active', f==='all');
+  document.getElementById('btn-unread').classList.toggle('active', f==='unread');
+  renderList();
+}
+
+function renderList() {
+  const search = document.getElementById('search-input').value.toLowerCase();
+  const typeF = document.getElementById('filter-type').value;
+  const svcF = document.getElementById('filter-service').value;
+  let list = [...enquiries].reverse();
+  if(readFilter==='unread') list = list.filter(e=>!e.read);
+  if(search) list = list.filter(e => e.name.toLowerCase().includes(search) || e.contact.toLowerCase().includes(search));
+  if(typeF) list = list.filter(e=>e.type===typeF);
+  if(svcF) list = list.filter(e=>e.service===svcF);
+
+  const el = document.getElementById('entries-list');
+  if(list.length === 0) {
+    el.innerHTML = '<div class="empty"><i class="ti ti-inbox" aria-hidden="true"></i><div>No enquiries found.</div></div>';
+    return;
+  }
+  el.innerHTML = list.map(e => `
+    <div class="entry-row${selectedId===e.id?' selected':''}" onclick="selectEntry('${e.id}')">
+      <div class="entry-head">
+        <div class="avatar">${initials(e.name)}</div>
+        <div>
+          <div class="entry-name">${e.name}${!e.read?'<span class="new-badge">NEW</span>':''}</div>
+          <div class="entry-contact">${e.contact}</div>
+        </div>
+      </div>
+      <div><span class="${badgeClass(e.type)}">${e.type}</span></div>
+      <div class="entry-service">${e.service}</div>
+      <div class="entry-time">${timeAgo(e.ts)}</div>
+      <div class="status-dot${e.read?' read':''}"></div>
+    </div>
+  `).join('');
+}
+
+function selectEntry(id) {
+  const e = enquiries.find(x=>x.id===id);
+  if(!e) return;
+  selectedId = id;
+  if(!e.read) { e.read = true; save(); updateStats(); }
+  renderList();
+  const panel = document.getElementById('detail-panel');
+  panel.classList.remove('hidden');
+  panel.innerHTML = `
+    <div class="dp-header">
+      <div>
+        <div class="dp-name">${e.name}</div>
+        <div class="dp-time">${new Date(e.ts).toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'short'})}</div>
+      </div>
+      <button class="close-btn" onclick="closeDetail()" aria-label="Close">×</button>
+    </div>
+    <div class="dp-grid">
+      <div class="dp-field"><label>Contact</label><span>${e.contact}</span></div>
+      <div class="dp-field"><label>Type</label><span>${e.type}</span></div>
+      <div class="dp-field"><label>Service</label><span>${e.service}</span></div>
+      <div class="dp-field"><label>Source</label><span>${e.source||'—'}</span></div>
+    </div>
+    ${e.message ? `<div class="dp-msg"><label>Message</label><p>${e.message}</p></div>` : ''}
+    <div class="dp-actions">
+      <button onclick="deleteEntry('${e.id}')" style="color:var(--text-danger);border-color:var(--border-danger)"><i class="ti ti-trash" aria-hidden="true"></i> Delete</button>
+      <button onclick="markUnread('${e.id}')"><i class="ti ti-mail" aria-hidden="true"></i> Mark unread</button>
+    </div>
+  `;
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function closeDetail() {
+  selectedId = null;
+  document.getElementById('detail-panel').classList.add('hidden');
+  renderList();
+}
+
+function deleteEntry(id) {
+  enquiries = enquiries.filter(e=>e.id!==id);
+  save(); updateStats(); closeDetail(); renderList();
+}
+
+function markUnread(id) {
+  const e = enquiries.find(x=>x.id===id);
+  if(e) { e.read = false; save(); updateStats(); closeDetail(); renderList(); }
+}
+
+async function clearAll() {
+  if(!confirm('Delete all enquiries? This cannot be undone.')) return;
+  enquiries = [];
+  await save();
+  updateStats(); closeDetail(); renderList();
+}
+
+const DEMO_NAMES = ['Rohan Mehta','Priya Sharma','Aakash Verma','Neha Bisht','Siddharth Rawat','Kavya Joshi'];
+const DEMO_TYPES = ['Business / Brand','Creator / Influencer','Event Organizer','Celebrity','Other'];
+const DEMO_SVCS = ['AI Ads & Content','Video Editing','Social Media Management','Brand Collab / Promotion','Event Marketing','Full Package'];
+const DEMO_MSGS = [
+  'We run a cafe in Haldwani and want to grow our Instagram to 10k followers.',
+  'I am a travel creator and looking for brand collab opportunities.',
+  'Organising a cultural fest in March 2026, need full digital coverage.',
+  'Need reels edited and posted regularly for my food cart at the carnival.',
+  'Looking for AI-generated ads for our clothing brand launch.'
+];
+function addDemo() {
+  const n = DEMO_NAMES[Math.floor(Math.random()*DEMO_NAMES.length)];
+  const entry = {
+    id: Date.now()+Math.random().toString(36).slice(2),
+    name: n,
+    contact: '+91 98' + Math.floor(10000000+Math.random()*89999999),
+    type: DEMO_TYPES[Math.floor(Math.random()*DEMO_TYPES.length)],
+    service: DEMO_SVCS[Math.floor(Math.random()*DEMO_SVCS.length)],
+    message: DEMO_MSGS[Math.floor(Math.random()*DEMO_MSGS.length)],
+    source: ['Instagram','Referral','Google','KumaonFest'][Math.floor(Math.random()*4)],
+    ts: Date.now() - Math.floor(Math.random()*7*24*60*60*1000),
+    read: false
+  };
+  enquiries.push(entry);
+  save(); updateStats(); renderList();
+}
+
+load();
+</script>

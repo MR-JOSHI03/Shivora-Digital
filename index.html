@@ -796,7 +796,7 @@ footer{
       <div class="founder-name">Shivam Joshi</div>
       <div class="founder-title">Founder & Creative Director · Shivora Digital</div>
       <p class="founder-bio">
-        BCA graduate from Haldwani, Uttarakhand — building at the intersection of AI, content creation, and community. Creator of <strong style="color:var(--silver-l);font-weight:500">@girlfromhaldwani</strong> (India's first Pahadi AI virtual influencer), community manager at <strong style="color:var(--silver-l);font-weight:500">@haldwaniwale</strong>, and core team member at KumaonFest.<br><br>
+        BCA graduate from Haldwani, Uttarakhand — building at the intersection of AI, content creation, and community. Creator of <a href="https://www.instagram.com/girlfromhaldwani/" target="_blank" rel="noopener noreferrer" style="color:var(--purple-l);font-weight:500;text-decoration:none">@girlfromhaldwani</a> (India's first Pahadi AI virtual influencer), community manager at <a href="https://www.instagram.com/haldwaniwale/" target="_blank" rel="noopener noreferrer" style="color:var(--purple-l);font-weight:500;text-decoration:none">@haldwaniwale</a>, and core team member at KumaonFest.<br><br>
         Specialising in Generative AI workflows (LangChain, Hugging Face, Veo 2), social media growth, and brand storytelling that bridges regional pride with emerging technology.
       </p>
       <div class="founder-links">
@@ -1016,15 +1016,33 @@ document.querySelectorAll('[data-target]').forEach(el=>countObs.observe(el));
 function selectRadio(label,group){
   document.querySelectorAll('#radio-'+group+' .radio-opt').forEach(l=>l.classList.remove('selected'));
   label.classList.add('selected');
+  const input=label.querySelector('input');
+  if(input) input.checked=true;
+}
+
+const ENQUIRY_STORE_KEY='shivora-enquiries';
+
+function getStoredEnquiries(){
+  try{
+    const raw=localStorage.getItem(ENQUIRY_STORE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  }catch{return []};
+}
+
+function setStoredEnquiries(entries){
+  try{localStorage.setItem(ENQUIRY_STORE_KEY, JSON.stringify(entries));}catch{}
 }
 
 // ─── FORM SUBMIT
-function submitForm(e){
+async function submitForm(e){
   e.preventDefault();
+  const form=document.getElementById('enqForm');
   const name=document.getElementById('f-name').value.trim();
   const contact=document.getElementById('f-contact').value.trim();
   const service=document.getElementById('f-service').value;
   const type=document.querySelector('input[name="type"]:checked');
+  const message=document.getElementById('f-msg').value.trim();
+  const source=document.getElementById('f-source').value;
   if(!name||!contact||!service||!type){
     const missing=[];
     if(!name)missing.push('Name');
@@ -1034,6 +1052,24 @@ function submitForm(e){
     alert('Please fill in: '+missing.join(', '));
     return false;
   }
+
+  const payload={
+    id: Date.now().toString(36)+Math.random().toString(36).slice(2),
+    name,
+    contact,
+    type: type.value,
+    service,
+    message,
+    source,
+    ts: Date.now(),
+    read:false
+  };
+
+  const entries=[payload, ...getStoredEnquiries()];
+  setStoredEnquiries(entries);
+
+  form.reset();
+  document.querySelectorAll('#radio-type .radio-opt').forEach(opt=>opt.classList.remove('selected'));
   document.getElementById('enqForm').style.display='none';
   document.getElementById('formSuccess').style.display='block';
   return false;
