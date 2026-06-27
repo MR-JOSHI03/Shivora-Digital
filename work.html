@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shivora Digital — Work & Reels</title>
+  <meta name="description" content="A curated showcase of Shivora Digital’s market work, girlfromHaldwani collaborations, and political social media management reels." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --deep: #12151f;
+      --mid: #1c2030;
+      --panel: #242840;
+      --panel2: #2c3050;
+      --silver: #a8adc0;
+      --silver-l: #cdd0e0;
+      --purple: #7b6fc4;
+      --purple-l: #a89de8;
+      --purple-d: #5a50a0;
+      --white: #eef0f8;
+      --muted: #565c7a;
+      --border: rgba(168, 173, 192, 0.14);
+      --border-h: rgba(168, 173, 192, 0.28);
+      --glow: rgba(123, 111, 196, 0.18);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--deep);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      background: rgba(18, 21, 31, 0.9);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--white);
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-logo-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 7px;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--panel2), var(--purple));
+      border: 1px solid rgba(123, 111, 196, 0.4);
+      display: grid;
+      place-items: center;
+    }
+
+    .nav-logo-mark img { width: 100%; height: 100%; object-fit: cover; }
+
+    .nav-links { display: flex; gap: 1.4rem; list-style: none; }
+    .nav-links a {
+      color: var(--silver);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .page-shell { position: relative; z-index: 1; }
+
+    .hero {
+      padding: 5rem 2.5rem 3rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-tag {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--purple-l);
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4.4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto;
+      color: var(--silver);
+      font-size: 1rem;
+      font-weight: 300;
+    }
+
+    .section {
+      padding: 4rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .section-heading h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 300;
+      color: var(--white);
+    }
+
+    .section-heading p {
+      color: var(--silver);
+      max-width: 520px;
+      font-size: 0.95rem;
+    }
+
+    .reel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+
+    .reel-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(145deg, rgba(36, 40, 64, 0.95), rgba(28, 32, 48, 0.95));
+      box-shadow: 0 14px 45px rgba(0, 0, 0, 0.18);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      cursor: pointer;
+    }
+
+    .reel-card:hover,
+    .reel-card:focus-within {
+      transform: translateY(-4px);
+      border-color: var(--purple-l);
+      box-shadow: 0 16px 54px var(--glow);
+    }
+
+    .reel-media {
+      position: relative;
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      background: #11141d;
+    }
+
+    .reel-media img,
+    .reel-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .reel-media video {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: scale(1.03);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
+    }
+
+    .reel-card:hover .reel-media video,
+    .reel-card:focus-within .reel-media video {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .reel-card:hover .reel-media img,
+    .reel-card:focus-within .reel-media img {
+      opacity: 0.15;
+    }
+
+    .reel-meta {
+      padding: 1rem 1rem 1.15rem;
+    }
+
+    .reel-meta .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.28rem 0.6rem;
+      margin-bottom: 0.7rem;
+      border-radius: 999px;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--purple-l);
+      background: rgba(123, 111, 196, 0.12);
+      border: 1px solid rgba(123, 111, 196, 0.18);
+    }
+
+    .reel-meta h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: var(--white);
+    }
+
+    .reel-meta p {
+      color: var(--silver);
+      font-size: 0.9rem;
+    }
+
+    .hint {
+      margin-top: 0.7rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 980px) {
+      .reel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1rem; }
+      .nav-links { display: none; }
+      .hero, .section { padding: 3rem 1rem; }
+      .reel-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <nav>
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-mark">
+          <img src="logo.png" alt="Shivora Digital logo" />
+        </div>
+        <span>Shivora Digital</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#market-work">Market Work</a></li>
+        <li><a href="#girlfromhaldwani">girlfromHaldwani</a></li>
+        <li><a href="#politics">Politics</a></li>
+      </ul>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-tag">Selected Work</div>
+      <h1>Reels that build visibility, credibility, and momentum.</h1>
+      <p>Hover over any reel to preview it in motion. Replace the sample video links with your final reels whenever you’re ready, and each section will keep the same premium presentation.</p>
+    </section>
+
+    <section class="section" id="market-work">
+      <div class="section-heading">
+        <div>
+          <h2>Our Market Work</h2>
+        </div>
+        <p>Showcase of campaigns and brand work we’ve executed in the market, designed to feel polished, local, and high-impact.</p>
+      </div>
+      <div class="reel-grid">
+        <article class="reel-card" tabindex="0">
+          <div class="reel-media">
+            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80" alt="Market campaign preview" />
+            <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80">
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="reel-meta">
+            <div class="pill">Market Campaign</div>
+            <h3>Local Brand Launch</h3>
+            <p>Short-form reel designed to introduce a brand to the market with strong product storytelling and fast pacing.</p>
+            <div class="hint">Hover to play</div>
+          </div>
+        </article>
+        <article class="reel-card" tabindex="0">
+          <div class="reel-media">
+            <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=900&q=80" alt="Community engagement reel preview" />
+            <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=900&q=80">
+              <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="reel-meta">
+            <div class="pill">Community Story</div>
+            <h3>Market Visibility Reel</h3>
+            <p>Reel built for engagement and reach, using rhythm, text overlays, and social-native pacing.</p>
+            <div class="hint">Hover to play</div>
+          </div>
+        </article>
+        <article class="reel-card" tabindex="0">
+          <div class="reel-media">
+            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=900&q=80" alt="Brand promotion preview" />
+            <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=900&q=80">
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="reel-meta">
+            <div class="pill">Promotion</div>
+            <h3>Brand Lift Reel</h3>
+            <p>Content crafted to create awareness, boost recall, and drive action with a cinematic feel.</p>
+            <div class="hint">Hover to play</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="girlfromhaldwani">
+      <div class="section-heading">
+        <div>
+          <h2>Collaborated Reels with girlfromHaldwani</h2>
+        </div>
+        <p>Creator-led collaborations designed to feel personal, community-driven, and highly shareable across social platforms.</p>
+      </div>
+      <div class="reel-grid">
+        <article class="reel-card" tabindex="0">
+          <div class="reel-media">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80" alt="girlfromHaldwani collaboration preview" />
+            <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80">
+              <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="reel-meta">
+            <div class="pill">Creator Collab</div>
+            <h3>Community Story Reel</h3>
+            <p>A creator collaboration focused on local identity, relatability, and strong audience connection.</p>
+            <div class="hint">Hover to play</div>
+          </div>
+        </article>
+        <article class="reel-card" tabindex="0">
+          <div class="reel-media">
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80" alt="Relatable creator reel preview" />
+            <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80">
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="reel-meta">
+            <div class="pill">Creator Collab</div>
+            <h3>Relatable Social Reel</h3>
+            <p>Designed for organic reach and high watch time with a conversational, creator-first tone.</p>
+            <div class="hint">Hover to play</div>
+          </div>
+        </article>
+        <article class="reel-card" tabindex="0">
+          <div class="reel-media">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80" alt="Brand collaboration preview" />
+            <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80">
+              <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="reel-meta">
+            <div class="pill">Creator Collab</div>
+            <h3>Audience Engagement Reel</h3>
+            <p>A polished collaboration reel built around audience retention and strong visual storytelling.</p>
+            <div class="hint">Hover to play</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="politics">
+      <div class="section-heading">
+        <div>
+          <h2>Political Social Media Management</h2>
+        </div>
+        <p>Strategic content for public-facing voices, combining reach, messaging discipline, and polished storytelling.</p>
+      </div>
+      <div class="reel-grid">
+        <article class="reel-card" tabindex="0">
+          <div class="reel-media">
+            <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=900&q=80" alt="Political campaign reel preview" />
+            <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=900&q=80">
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="reel-meta">
+            <div class="pill">Political Content</div>
+            <h3>Public Message Reel</h3>
+            <p>Social content built for clarity, credibility, and impact with a steady, professional rhythm.</p>
+            <div class="hint">Hover to play</div>
+          </div>
+        </article>
+        <article class="reel-card" tabindex="0">
+          <div class="reel-media">
+            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80" alt="Social media management preview" />
+            <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80">
+              <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="reel-meta">
+            <div class="pill">Political Content</div>
+            <h3>Community Connect Reel</h3>
+            <p>Reels crafted for trust-building, public communication, and wider local visibility.</p>
+            <div class="hint">Hover to play</div>
+          </div>
+        </article>
+        <article class="reel-card" tabindex="0">
+          <div class="reel-media">
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80" alt="Leadership reel preview" />
+            <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80">
+              <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="reel-meta">
+            <div class="pill">Political Content</div>
+            <h3>Leadership Narrative Reel</h3>
+            <p>Short-form storytelling focused on positioning, audience trust, and polished public messaging.</p>
+            <div class="hint">Hover to play</div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.querySelectorAll('.reel-card').forEach(card => {
+      const video = card.querySelector('video');
+      if (!video) return;
+
+      const playVideo = () => {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      };
+
+      const pauseVideo = () => {
+        video.pause();
+        video.currentTime = 0;
+      };
+
+      card.addEventListener('mouseenter', playVideo);
+      card.addEventListener('mouseleave', pauseVideo);
+      card.addEventListener('focusin', playVideo);
+      card.addEventListener('focusout', pauseVideo);
+    });
+  </script>
+</body>
+</html>
