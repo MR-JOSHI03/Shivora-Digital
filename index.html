@@ -2,12 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>Shivora Digital — Stay Drippin, Own the Influence</title>
 <meta name="description" content="Shivora Digital is a Haldwani-based AI-powered creative agency delivering AI ads, video editing, social media management, and brand collaborations for businesses and creators."/>
+<link rel="canonical" href="https://shivoradigital.com/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://shivoradigital.com/"/>
+<meta property="og:title" content="Shivora Digital — AI-Powered Creative Agency, Haldwani"/>
+<meta property="og:description" content="Shivora Digital is a Haldwani-based AI-powered creative agency delivering AI ads, video editing, social media management, and brand collaborations for businesses and creators."/>
+<meta property="og:image" content="https://shivoradigital.com/logo.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Shivora Digital — AI-Powered Creative Agency, Haldwani"/>
+<meta name="twitter:description" content="AI ads, video editing, social media management &amp; brand collabs — built for creators and businesses in Kumaon and beyond."/>
+<meta name="twitter:image" content="https://shivoradigital.com/logo.png"/>
+<meta name="robots" content="index, follow"/>
+<meta name="theme-color" content="#12151f"/>
+<link rel="preload" href="logo.png" as="image" type="image/png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/></noscript>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -36,6 +50,16 @@ body{
   overflow-x:hidden;
   cursor:none;
 }
+
+/* ─── SKIP LINK ─── */
+.skip-link{
+  position:absolute;top:-100px;left:1rem;
+  background:var(--purple);color:var(--white);
+  padding:.5rem 1rem;border-radius:4px;
+  font-size:.85rem;text-decoration:none;z-index:10000;
+  transition:top .2s;
+}
+.skip-link:focus{top:1rem}
 
 /* ─── CURSOR ─── */
 #cursor{
@@ -109,11 +133,11 @@ nav.scrolled{
   background:transparent;border:1px solid var(--purple);
   color:var(--purple-l);padding:.48rem 1.3rem;border-radius:4px;
   font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
-  font-family:'Inter',sans-serif;cursor:none;
+  font-family:'Inter',sans-serif;cursor:pointer;
   transition:all .25s;
 }
 .nav-cta:hover{background:var(--purple);color:var(--white)}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:none;background:none;border:none;padding:4px}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
 .hamburger span{display:block;width:22px;height:1.5px;background:var(--silver);transition:all .3s}
 .hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
 .hamburger.open span:nth-child(2){opacity:0}
@@ -185,7 +209,7 @@ nav.scrolled{
   background:var(--purple);color:var(--white);border:none;
   padding:.78rem 2.2rem;border-radius:4px;
   font-size:.88rem;letter-spacing:.06em;font-weight:500;
-  font-family:'Inter',sans-serif;cursor:none;
+  font-family:'Inter',sans-serif;cursor:pointer;
   transition:background .25s,transform .2s;
 }
 .btn-primary:hover{background:var(--purple-l);color:var(--deep);transform:translateY(-1px)}
@@ -194,7 +218,7 @@ nav.scrolled{
   border:1px solid var(--border-h);
   padding:.78rem 2.2rem;border-radius:4px;
   font-size:.88rem;letter-spacing:.06em;
-  font-family:'Inter',sans-serif;cursor:none;
+  font-family:'Inter',sans-serif;cursor:pointer;
   transition:all .25s;
 }
 .btn-ghost:hover{border-color:var(--silver);color:var(--white);transform:translateY(-1px)}
@@ -277,7 +301,7 @@ section{padding:5rem 2.5rem;border-bottom:1px solid var(--border)}
 .service-card{
   background:var(--mid);padding:2.2rem 1.8rem;
   transition:background .25s,transform .25s;
-  position:relative;overflow:hidden;cursor:none;
+  position:relative;overflow:hidden;cursor:default;
 }
 .service-card::before{
   content:'';position:absolute;inset:0;
@@ -313,7 +337,7 @@ section{padding:5rem 2.5rem;border-bottom:1px solid var(--border)}
 .work-card{
   background:var(--mid);border:1px solid var(--border);
   border-radius:12px;overflow:hidden;
-  transition:border-color .25s,transform .3s;cursor:none;
+  transition:border-color .25s,transform .3s;cursor:default;
   position:relative;
 }
 .work-card:hover{border-color:var(--border-h);transform:translateY(-4px)}
@@ -463,7 +487,7 @@ section{padding:5rem 2.5rem;border-bottom:1px solid var(--border)}
 .radio-group{display:flex;flex-wrap:wrap;gap:.5rem}
 .radio-opt{
   display:flex;align-items:center;gap:.4rem;
-  font-size:.8rem;color:var(--silver);cursor:none;
+  font-size:.8rem;color:var(--silver);cursor:pointer;
   background:var(--mid);border:1px solid var(--border-h);
   padding:.4rem .9rem;border-radius:20px;
   transition:all .2s;
@@ -475,7 +499,7 @@ section{padding:5rem 2.5rem;border-bottom:1px solid var(--border)}
   background:var(--purple);color:var(--white);border:none;
   padding:.82rem 1.8rem;border-radius:6px;
   font-size:.9rem;font-weight:500;font-family:'Inter',sans-serif;
-  cursor:none;transition:background .25s,transform .2s;
+  cursor:pointer;transition:background .25s,transform .2s;
   display:flex;align-items:center;justify-content:center;gap:.5rem;
 }
 .submit-btn:hover{background:var(--purple-l);color:var(--deep);transform:translateY(-1px)}
@@ -549,7 +573,8 @@ footer{
   .services-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .work-grid{grid-template-columns:1fr 1fr}
   .enquiry-grid{grid-template-columns:1fr}
-  .enq-intro{display:none}
+  .enq-intro{margin-bottom:1.5rem}
+  .enq-intro h3{font-size:1.5rem}
   .founder-wrap{grid-template-columns:1fr;text-align:center}
   .founder-avatar{margin:0 auto}
   .founder-links{justify-content:center}
@@ -579,9 +604,41 @@ footer{
   .hero-eyebrow::before,.hero-eyebrow::after{width:16px}
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness","ProfessionalService"],
+  "name": "Shivora Digital",
+  "description": "AI-powered creative agency based in Haldwani, Uttarakhand, offering AI ads, video editing, social media management, and brand collaborations.",
+  "url": "https://shivoradigital.com",
+  "logo": "https://shivoradigital.com/logo.png",
+  "image": "https://shivoradigital.com/logo.png",
+  "telephone": "",
+  "email": "shivoradigital@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Haldwani",
+    "addressRegion": "Uttarakhand",
+    "addressCountry": "IN"
+  },
+  "sameAs": [
+    "https://www.instagram.com/shivoradigital/",
+    "https://www.instagram.com/haldwaniwale/",
+    "https://www.instagram.com/girlfromhaldwani/"
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "Shivam Joshi",
+    "sameAs": "https://www.instagram.com/mr_joshi03/"
+  },
+  "areaServed": ["Haldwani","Uttarakhand","India"],
+  "serviceType": ["AI Content Creation","Video Editing","Social Media Management","Brand Collaborations","Event Marketing"]
+}
+</script>
 </head>
 <body>
 
+<a href="#services" class="skip-link">Skip to main content</a>
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
@@ -589,7 +646,7 @@ footer{
 <nav id="nav">
   <a href="#hero" class="nav-logo">
     <div class="nav-logo-mark">
-      <img src="logo.png" alt="Shivora Digital logo" />
+      <img src="logo.png" alt="Shivora Digital logo" width="34" height="34"/>
     </div>
     <span>Shivora Digital</span>
   </a>
@@ -600,7 +657,7 @@ footer{
     <li><a href="#enquiry">Enquiry</a></li>
   </ul>
   <button class="nav-cta" onclick="document.getElementById('enquiry').scrollIntoView({behavior:'smooth'})">Get in Touch</button>
-  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -761,7 +818,7 @@ footer{
         <div class="work-tag">Community Platform</div>
         <h3>@haldwaniwale</h3>
         <p>Haldwani's own community Instagram — local news, culture, food, events, and the digital heartbeat of the Kumaon region. A platform built by Shivora Digital.</p>
-        <a class="work-link" href="https://www.instagram.com/haldwaniwale/" target="_blank">
+        <a class="work-link" href="https://www.instagram.com/haldwaniwale/" target="_blank" rel="noopener noreferrer">
           Visit on Instagram <span>↗</span>
         </a>
       </div>
@@ -775,7 +832,7 @@ footer{
         <div class="work-tag">AI Virtual Influencer · Built by Shivora Digital</div>
         <h3>@girlfromhaldwani</h3>
         <p>India's AI virtual influencer rooted in Uttarakhand identity. Promoting Lok Mahotsav 2026, Pahadi culture, and modern storytelling through AI-generated content.</p>
-        <a class="work-link" href="https://www.instagram.com/girlfromhaldwani/" target="_blank">
+        <a class="work-link" href="https://www.instagram.com/girlfromhaldwani/" target="_blank" rel="noopener noreferrer">
           Visit on Instagram <span>↗</span>
         </a>
       </div>
@@ -812,7 +869,7 @@ footer{
     <h2 class="section-h2">Meet the Founder</h2>
   </div>
   <div class="founder-wrap reveal">
-    <img class="founder-avatar" src="20250522_171434.jpg" alt="Shivam Joshi" />
+    <img class="founder-avatar" src="20250522_171434.jpg" alt="Shivam Joshi — Founder, Shivora Digital" loading="lazy" width="200" height="200"/>
     <div>
       <div class="founder-name">Shivam Joshi</div>
       <div class="founder-title">Founder & Creative Director · Shivora Digital</div>
@@ -821,15 +878,15 @@ footer{
         Specialising in Generative AI workflows (LangChain, Hugging Face, Veo 2), social media growth, and brand storytelling that bridges regional pride with emerging technology.
       </p>
       <div class="founder-links">
-        <a class="founder-link" href="https://www.instagram.com/mr_joshi03/" target="_blank">
+        <a class="founder-link" href="https://www.instagram.com/mr_joshi03/" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           @mr_joshi03
         </a>
-        <a class="founder-link" href="https://www.instagram.com/shivamsnipsai/" target="_blank">
+        <a class="founder-link" href="https://www.instagram.com/shivamsnipsai/" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           @shivamsnipsai
         </a>
-        <a class="founder-link" href="https://www.instagram.com/shivoradigital/" target="_blank">
+        <a class="founder-link" href="https://www.instagram.com/shivoradigital/" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           @shivoradigital
         </a>
@@ -851,7 +908,7 @@ footer{
       <div class="contact-rows">
         <div class="contact-row">
           <div class="c-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>
-          DM via <a href="https://www.instagram.com/shivoradigital/" target="_blank" style="color:var(--purple-l);margin-left:.3rem">@shivoradigital</a>
+          DM via <a href="https://www.instagram.com/shivoradigital/" target="_blank" rel="noopener noreferrer" style="color:var(--purple-l);margin-left:.3rem">@shivoradigital</a>
         </div>
         <div class="contact-row">
           <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
@@ -863,7 +920,7 @@ footer{
         </div>
         <div class="contact-row">
           <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
-          <a href="https://www.instagram.com/shivoradigital/" target="_blank" style="color:var(--purple-l)">instagram.com/shivoradigital</a>
+          <a href="https://www.instagram.com/shivoradigital/" target="_blank" rel="noopener noreferrer" style="color:var(--purple-l)">instagram.com/shivoradigital</a>
         </div>
       </div>
     </div>
@@ -926,7 +983,7 @@ footer{
         <svg viewBox="0 0 24 24" style="width:40px;height:40px;stroke:var(--purple-l);fill:none;stroke-width:1.5;margin-bottom:1rem"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         <h4>Thank you for reaching out.</h4>
         <p>We've received your enquiry and will get back to you within 24 hours.<br><br>
-        In the meantime, follow us on <a href="https://www.instagram.com/shivoradigital/" target="_blank" style="color:var(--purple-l)">@shivoradigital</a>.</p>
+        In the meantime, follow us on <a href="https://www.instagram.com/shivoradigital/" target="_blank" rel="noopener noreferrer" style="color:var(--purple-l)">@shivoradigital</a>.</p>
       </div>
     </div>
   </div>
@@ -947,10 +1004,10 @@ footer{
   </div>
   <div class="footer-col">
     <h4>Our Platforms</h4>
-    <a href="https://www.instagram.com/shivoradigital/" target="_blank">@shivoradigital</a>
-    <a href="https://www.instagram.com/haldwaniwale/" target="_blank">@haldwaniwale</a>
-    <a href="https://www.instagram.com/girlfromhaldwani/" target="_blank">@girlfromhaldwani</a>
-    <a href="https://www.instagram.com/mr_joshi03/" target="_blank">@mr_joshi03 (Founder)</a>
+    <a href="https://www.instagram.com/shivoradigital/" target="_blank" rel="noopener noreferrer">@shivoradigital</a>
+    <a href="https://www.instagram.com/haldwaniwale/" target="_blank" rel="noopener noreferrer">@haldwaniwale</a>
+    <a href="https://www.instagram.com/girlfromhaldwani/" target="_blank" rel="noopener noreferrer">@girlfromhaldwani</a>
+    <a href="https://www.instagram.com/mr_joshi03/" target="_blank" rel="noopener noreferrer">@mr_joshi03 (Founder)</a>
   </div>
   <div class="footer-bottom">
     <p>© 2026 Shivora Digital. Haldwani, Uttarakhand, India. All rights reserved.</p>
@@ -999,8 +1056,9 @@ window.addEventListener('scroll',()=>{
 const ham=document.getElementById('hamburger');
 const mmenu=document.getElementById('mobile-menu');
 ham.addEventListener('click',()=>{
-  ham.classList.toggle('open');
+  const isOpen=ham.classList.toggle('open');
   mmenu.classList.toggle('open');
+  ham.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 });
 mmenu.querySelectorAll('a').forEach(a=>{
   a.addEventListener('click',()=>{ham.classList.remove('open');mmenu.classList.remove('open')});

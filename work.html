@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shivora Digital — Work & Reels</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Our Work — AI Ads, Reels &amp; Brand Campaigns | Shivora Digital</title>
   <meta name="description" content="A curated showcase of Shivora Digital’s market work, girlfromHaldwani collaborations, and political social media management reels." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="preload" href="logo.png" as="image" type="image/png"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/></noscript>
   <style>
     :root {
       --deep: #12151f;
@@ -255,6 +257,29 @@
       .reel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
+    
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--silver);
+      transition: all .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    @media (max-width: 640px) {
+      .hamburger { display: flex; }
+    }
     @media (max-width: 640px) {
       nav { padding: 1rem 1rem; }
       .nav-links { display: none; }
@@ -268,7 +293,7 @@
     <nav>
       <a href="index.html" class="nav-logo">
         <div class="nav-logo-mark">
-          <img src="logo.png" alt="Shivora Digital logo" />
+          <img src="logo.png" alt="Shivora Digital logo"  loading="lazy"/>
         </div>
         <span>Shivora Digital</span>
       </a>
@@ -278,7 +303,16 @@
         <li><a href="#girlfromhaldwani">girlfromHaldwani</a></li>
         <li><a href="#politics">Politics</a></li>
       </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu-work">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
+    <div id="mobile-menu-work" style="display:none;position:sticky;top:64px;z-index:19;background:rgba(18,21,31,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:1rem 1.5rem;">
+      <a href="index.html" style="display:block;padding:.6rem 0;color:var(--silver);text-decoration:none;font-size:.9rem;border-bottom:1px solid var(--border)">Home</a>
+      <a href="#market-work" style="display:block;padding:.6rem 0;color:var(--silver);text-decoration:none;font-size:.9rem;border-bottom:1px solid var(--border)">Market Work</a>
+      <a href="#girlfromhaldwani" style="display:block;padding:.6rem 0;color:var(--silver);text-decoration:none;font-size:.9rem;border-bottom:1px solid var(--border)">girlfromHaldwani</a>
+      <a href="#politics" style="display:block;padding:.6rem 0;color:var(--silver);text-decoration:none;font-size:.9rem">Politics</a>
+    </div>
 
     <section class="hero">
       <div class="hero-tag">Selected Work</div>
@@ -296,7 +330,7 @@
       <div class="reel-grid">
         <article class="reel-card" tabindex="0">
           <div class="reel-media">
-            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80" alt="Market campaign preview" />
+            <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80" alt="Market campaign preview"  loading="lazy"/>
             <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&w=900&q=80">
               <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
             </video>
@@ -310,7 +344,7 @@
         </article>
         <article class="reel-card" tabindex="0">
           <div class="reel-media">
-            <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=900&q=80" alt="Community engagement reel preview" />
+            <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=900&q=80" alt="Community engagement reel preview"  loading="lazy"/>
             <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?auto=format&fit=crop&w=900&q=80">
               <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4" />
             </video>
@@ -324,7 +358,7 @@
         </article>
         <article class="reel-card" tabindex="0">
           <div class="reel-media">
-            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=900&q=80" alt="Brand promotion preview" />
+            <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=900&q=80" alt="Brand promotion preview"  loading="lazy"/>
             <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=900&q=80">
               <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
             </video>
@@ -402,7 +436,7 @@
       <div class="reel-grid">
         <article class="reel-card" tabindex="0">
           <div class="reel-media">
-            <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=900&q=80" alt="Political campaign reel preview" />
+            <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=900&q=80" alt="Political campaign reel preview"  loading="lazy"/>
             <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=900&q=80">
               <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
             </video>
@@ -416,7 +450,7 @@
         </article>
         <article class="reel-card" tabindex="0">
           <div class="reel-media">
-            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80" alt="Social media management preview" />
+            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80" alt="Social media management preview"  loading="lazy"/>
             <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=900&q=80">
               <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4" />
             </video>
@@ -430,7 +464,7 @@
         </article>
         <article class="reel-card" tabindex="0">
           <div class="reel-media">
-            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80" alt="Leadership reel preview" />
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80" alt="Leadership reel preview"  loading="lazy"/>
             <video muted playsinline preload="metadata" loop poster="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80">
               <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
             </video>
@@ -444,7 +478,21 @@
         </article>
       </div>
     </section>
-  </div>
+  
+  <footer style="padding:2rem 2.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--silver-l);margin-bottom:.25rem;">Shivora Digital</div>
+      <div style="font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);">Stay Drippin, Own the Influence</div>
+    </div>
+    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+      <a href="index.html" style="color:var(--silver);text-decoration:none;font-size:.84rem;transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--silver)'">Home</a>
+      <a href="index.html#services" style="color:var(--silver);text-decoration:none;font-size:.84rem;transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--silver)'">Services</a>
+      <a href="index.html#enquiry" style="color:var(--silver);text-decoration:none;font-size:.84rem;transition:color .2s;" onmouseover="this.style.color='var(--white)'" onmouseout="this.style.color='var(--silver)'">Enquiry</a>
+      <a href="https://www.instagram.com/shivoradigital/" target="_blank" rel="noopener noreferrer" style="color:var(--purple-l);text-decoration:none;font-size:.84rem;">@shivoradigital</a>
+    </div>
+    <p style="font-size:.72rem;color:var(--muted);width:100%;text-align:center;padding-top:.75rem;border-top:1px solid var(--border);">© 2026 Shivora Digital. Haldwani, Uttarakhand, India.</p>
+  </footer>
+
 
   <script async src="https://www.instagram.com/embed.js"></script>
 
@@ -468,6 +516,25 @@
       card.addEventListener('focusin', playVideo);
       card.addEventListener('focusout', pauseVideo);
     });
+  </script>
+
+  <script>
+    const ham = document.getElementById('hamburger');
+    const mmenu = document.getElementById('mobile-menu-work');
+    if (ham && mmenu) {
+      ham.addEventListener('click', () => {
+        const isOpen = ham.classList.toggle('open');
+        mmenu.style.display = isOpen ? 'block' : 'none';
+        ham.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+      mmenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          ham.classList.remove('open');
+          mmenu.style.display = 'none';
+          ham.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
   </script>
 </body>
 </html>
